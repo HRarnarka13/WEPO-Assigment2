@@ -1,0 +1,27 @@
+{
+  "name": "WEPO-Assignment2",
+  "version": "1.0.0",
+  "homepage": "https://github.com/HRarnarka13/WEPO-Assigment2",
+  "authors": [
+    "arnarka13@ru.is freyr12@ru.is"
+  ],
+  "description": "Wepo Assignment",
+  "main": "src/index.html",
+  "keywords": [
+    "angular",
+    "wepo",
+    "assignment2"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.1.1",
+    "angular": "~1.3.0"
+  }
+}
