@@ -7,4 +7,4 @@
 
 ## Instruction
 
-Run `grunt checkjs` to perform jshint for every .js file in the `src/` folder.
+Run `grunt checkjs` to perform jshint for every `.js` file in the `src/` folder.
