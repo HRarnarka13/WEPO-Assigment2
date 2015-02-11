@@ -1,0 +1,19 @@
+{
+  "name": "WEPO-Assignment2",
+  "version": "1.0.0",
+  "description": "WEPO Assignment",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HRarnarka13/WEPO-Assigment2.git"
+  },
+  "author": "arnarka13@ru.is freyr12@ru.is",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HRarnarka13/WEPO-Assigment2/issues"
+  },
+  "homepage": "https://github.com/HRarnarka13/WEPO-Assigment2"
+}
