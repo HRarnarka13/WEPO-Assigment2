@@ -8,12 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/HRarnarka13/WEPO-Assigment2.git"
+    "url": "https://github.com/HRarnarka13/WEPO-Assignment2.git"
   },
   "author": "arnarka13@ru.is freyr12@ru.is",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HRarnarka13/WEPO-Assigment2/issues"
+    "url": "https://github.com/HRarnarka13/WEPO-Assignment2/issues"
   },
-  "homepage": "https://github.com/HRarnarka13/WEPO-Assigment2"
+  "homepage": "https://github.com/HRarnarka13/WEPO-Assignment2",
+  "dependencies" : {  
+    "express" : "3.1.0",
+    "socket.io" : "0.9.13"
+  }
 }
