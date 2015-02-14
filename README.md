@@ -6,6 +6,6 @@
 
 ## Instruction
 ### Grunt commands
-Run `grunt checkjs` to perform jshint for every `.js` file in the `src/` folder.
-Run `grunt minify` to concat every `.js` file in the `src/` folder. The output will go to `src/js/dest/output.min.js`.
+1. Run `grunt checkjs` to perform jshint for every `.js` file in the `src/` folder.
+2. Run `grunt minify` to concat every `.js` file in the `src/` folder. The output will go to `src/js/dest/output.min.js`.
 
