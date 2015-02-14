@@ -1,5 +1,6 @@
 module.exports = function ( grunt ) { 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.initConfig({
 		jshint: {
 			src: ['src/**/*.js'],
@@ -23,7 +24,16 @@ module.exports = function ( grunt ) {
 					$:       false
 				}
 			}
+		},
+		uglify: {
+			my_target: {
+		      	files: {
+		        	'dest/output.min.js': ['src/js/*.js']
+		      	}
+		    }
 		}
 	});
 	grunt.registerTask('checkjs', ['jshint']);
+	grunt.registerTask('minify', ['uglify']);
+	grunt.registerTask('default', ['jshint', 'uglify']);
 };
