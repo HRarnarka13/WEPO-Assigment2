@@ -4,7 +4,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.initConfig({
 		jshint: {
-			src: ['src/**/*.js', '!src/js/dest/output.min.js'],
+			src: ['src/**/*.js', '!src/js/dest/*.js'],
 			gruntfile: ['Gruntfile.js'],
 			options: {
 				curly:  true,
