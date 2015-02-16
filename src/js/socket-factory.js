@@ -1,7 +1,7 @@
 // Factory to wrap around the socket functions
 // Borrowed from Brian Ford
 // http://briantford.com/blog/angular-socket-io.html
-angular.module('ChatClient', ['ngRoute']).factory('socket', function ($rootScope) {
+ChatClient.factory('socket', function ($rootScope) {
     var socket = io.connect('http://localhost:8080');
     return {
         on: function (eventName, callback) {

@@ -51,7 +51,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 			}
 
 		});
-	};
+	}
 
 	// socket.on('rooms', function () {
 	// 	socket.emit('roomlist', $scope.rooms, function (availableRooms) {
