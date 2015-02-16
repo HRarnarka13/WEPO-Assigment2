@@ -36,7 +36,6 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
 	$scope.errorMessage = '';
-	$scope.currentUser = $routeParams.user;
 	$scope.rooms = ['Room 1','Room 2','Room 3','Room 4','Room 5'];
 	$scope.createNewRoom = function() {
 		$scope.newRoom = {
@@ -52,7 +51,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 			}
 
 		});
-	}
+	};
 
 	// socket.on('rooms', function () {
 	// 	socket.emit('roomlist', $scope.rooms, function (availableRooms) {
