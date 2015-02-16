@@ -24,7 +24,6 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 			socket.emit('adduser', $scope.nickname, function (available) {
 				if (available) {
 					$location.path('/rooms/' + $scope.nickname);
-
 				} else {
 					$scope.errorMessage = 'This nick-name is already taken!';
 				}
@@ -36,6 +35,8 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
 	$scope.errorMessage = '';
+	$scope.currentUser = $routeParams.user;
+	
 	$scope.rooms = ['Room 1','Room 2','Room 3','Room 4','Room 5'];
 	$scope.createNewRoom = function() {
 		$scope.newRoom = {
@@ -46,10 +47,8 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 			if (!success) {
 				$scope.errorMessage = reason;
 			} else {
-				console.log($scope.newRoom.room);
 				$location.path('/room/' + $routeParams.user + '/' + $scope.newRoom.room);
 			}
-
 		});
 	};
 
