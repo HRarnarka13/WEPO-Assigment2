@@ -3,8 +3,8 @@
 	<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
 		{{errorMessage}}
 	</div>
-	<ul ng-repeat="room in rooms">
-		<li><a href="#/room/{{currentUser}}/{{room}}">{{room}}</a></li>
+	<ul>
+		<li ng-repeat="room in rooms"><a href="#/room/{{currentUser}}/{{room}}">{{room}}</a></li>
 	</ul>
 
 	<button type="button" class="btn btn-primary" ng-click="createNewRoom()">New room</button>
