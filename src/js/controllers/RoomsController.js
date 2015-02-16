@@ -1,4 +1,4 @@
-angular.module('ChatClient', ['ngRoute']).controller('RoomsController', 
+ChatClient.controller('RoomsController', 
 function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
 	$scope.errorMessage = '';
@@ -12,7 +12,6 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 			if (!success) {
 				$scope.errorMessage = reason;
 			} else {
-				console.log($scope.newRoom.room);
 				$location.path('/room/' + $routeParams.user + '/' + $scope.newRoom.room);
 			}
 
