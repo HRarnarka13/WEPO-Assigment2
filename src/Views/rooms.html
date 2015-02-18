@@ -6,6 +6,9 @@
 	<ul>
 		<li ng-repeat="room in rooms"><a href="#/room/{{currentUser}}/{{room}}">{{room}}</a></li>
 	</ul>
-
-	<button type="button" class="btn btn-primary" ng-click="createNewRoom()">New room</button>
+	<div class="form-group">
+		<label for="roomName" class="control-label">New room: </label>
+		<input type="text" class="form-control" id="roomName" name="roomName" ng-model="roomName" />
+		<button type="button" class="btn btn-primary" ng-click="createNewRoom()">Create</button>
+	</div>
 </div>
