@@ -17,7 +17,15 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 	$scope.errorMessage = '';
 	$scope.nickname = '';
 
-	$scope.login = function() {			
+	//Enter has the same function as the button "Enter chat"
+	$(window).keypress(function(e){
+		if(e.keyCode == 13){
+			$scope.login();
+		}
+	});
+
+	$scope.login = function() {
+
 		if ($scope.nickname === '') {
 			$scope.errorMessage = 'Please choose a nick-name before continuing!';
 		} else {
