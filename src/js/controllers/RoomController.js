@@ -5,6 +5,14 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.currentUsers = [];
 	$scope.errorMessage = '';
 
+	$scope.sendMsg = function(){
+		$scope.sendMsg = {
+			roomName: $scope.roomName,
+			msg: undefined
+		}
+		socket.on('sendmsg', $scope.sendMsg);
+	};
+
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
 		$scope.currentUsers = users;
