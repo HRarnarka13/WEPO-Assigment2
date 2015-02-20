@@ -40,46 +40,47 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 	};
 });
 
-ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
-	// TODO: Query chat server for active rooms
-	$scope.errorMessage = '';
-	$scope.currentUser = $routeParams.user;
-	$scope.roomName = '';
-	$scope.rooms = ['Room 1','Room 2','Room 3','Room 4','Room 5'];
-	$scope.createNewRoom = function() {
-		if ($scope.roomName === '') {
-			$scope.errorMessage = 'Room name cannot be empty!';
-		} else {
-			$scope.newRoom = {
-				room : $scope.roomName,
-				pass : undefined
-			};
-			socket.emit('joinroom', $scope.newRoom, function (success, reason) {
-				if (!success) {
-					$scope.errorMessage = reason;
-				} else {
-					$location.path('/room/' + $routeParams.user + '/' + $scope.roomName);
-				}
-			});
-		}
-	};
+// ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
+// 	// TODO: Query chat server for active rooms
+// 	$scope.errorMessage = '';
+// 	$scope.currentUser = $routeParams.user;
+// 	console.log($scope.currentUser);
+// 	$scope.roomName = '';
+// 	$scope.rooms = ['Room 1','Room 2','Room 3','Room 4','Room 5'];
+// 	$scope.createNewRoom = function() {
+// 		if ($scope.roomName === '') {
+// 			$scope.errorMessage = 'Room name cannot be empty!';
+// 		} else {
+// 			$scope.newRoom = {
+// 				room : $scope.roomName,
+// 				pass : undefined
+// 			};
+// 			socket.emit('joinroom', $scope.newRoom, function (success, reason) {
+// 				if (!success) {
+// 					$scope.errorMessage = reason;
+// 				} else {
+// 					$location.path('/room/' + $routeParams.user + '/' + $scope.roomName);
+// 				}
+// 			});
+// 		}
+// 	};
 
-	socket.on('rooms', function () {
-		socket.emit('roomlist', $scope.rooms, function (availableRooms) {
-			console.log("inni rooms socket");
+// 	socket.on('rooms', function () {
+// 		socket.emit('roomlist', $scope.rooms, function (availableRooms) {
+// 			console.log("inni rooms socket");
 
-			$scope.$apply(function(){
-				if (availableRooms) {
-					console.log(availableRooms);
-					$scope.rooms = availableRooms;
-				} else {
-					console.log("no rooms");
-					$scope.errorMessage = "There are no available rooms";
-				}
-			});
-		});
-	});
-});
+// 			$scope.$apply(function(){
+// 				if (availableRooms) {
+// 					console.log(availableRooms);
+// 					$scope.rooms = availableRooms;
+// 				} else {
+// 					console.log("no rooms");
+// 					$scope.errorMessage = "There are no available rooms";
+// 				}
+// 			});
+// 		});
+// 	});
+// });
 
 ChatClient.controller('RoomController', function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.currentRoom = $routeParams.room;
