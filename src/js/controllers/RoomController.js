@@ -5,12 +5,25 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.currentUsers = [];
 	$scope.errorMessage = '';
 
+	$scope.sendMessage = {
+		roomName: $scope.currentRoom,
+		msg: $scope.message
+	}
+	console.log($scope.sendMessage);
+
 	$scope.sendMsg = function(){
-		$scope.sendMsg = {
-			roomName: $scope.roomName,
-			msg: undefined
-		}
-		socket.on('sendmsg', $scope.sendMsg);
+		$scope.sendMessage.msg = $scope.message;
+		console.log($scope.sendMessage);
+		socket.emit('sendmsg', $scope.sendMessage, function (message){
+
+		});
+
+		// socket.emit('addMessage', $scope.message, function (Message){
+		// });
+	};
+
+	$scope.backToRooms = function(){
+		$location.path('/rooms/' + $scope.nickname);
 	};
 
 	socket.on('updateusers', function (roomName, users, ops) {
@@ -18,9 +31,18 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 		$scope.currentUsers = users;
 	});		
 
-	socket.emit('joinroom', $scope.currentRoom, function (success, reason) {
+	socket.emit("rooms", function() {
+		console.log("inni rooms socket");
+	});
+
+	socket.on("roomlist", function(roomList) {
+		$scope.messageHistory = roomList.lobby.messageHistory;
+		console.log($scope.messageHistory);
+	});
+
+	/*socket.emit('joinroom', $scope.currentRoom, function (success, reason) {
 		if (!success) {
 			$scope.errorMessage = reason;
 		}
-	});
+	});*/
 });

@@ -99,6 +99,7 @@ io.sockets.on('connection', function (socket) {
 
 	// when the client emits 'sendchat', this listens and executes
 	socket.on('sendmsg', function (data) {
+		console.log("***************");
 		
 		var userAllowed = false;
 
@@ -109,7 +110,9 @@ io.sockets.on('connection', function (socket) {
 		if(rooms[data.roomName].ops[socket.username] !== undefined) {
 			userAllowed = true;
 		}
-
+		console.log("users: " + rooms[data.roomName].users[socket.username]);
+		console.log("ops: " + rooms[data.roomName].ops[socket.username]);
+		console.log(userAllowed);
 		if(userAllowed) {
 			//Update the message history for the room that the user sent the message to.
 			var messageObj = {
@@ -118,6 +121,8 @@ io.sockets.on('connection', function (socket) {
 				message : data.msg.substring(0, 200)
 			};
 			rooms[data.roomName].addMessage(messageObj);
+			console.log(rooms[data.roomName].messageHistory);
+			console.log("yoyoyoyooyoyoyoyoyoyo");
 			io.sockets.emit('updatechat', data.roomName, rooms[data.roomName].messageHistory);
 		}
 	});
