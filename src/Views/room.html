@@ -14,6 +14,11 @@
 		</ul>
 	</div>
 </div>
+<div class="col-md-9">
+	<ul>
+		<li ng-repeat"mess in messageHistory">{{mess}}</li>
+	</ul>
+</div>
 <div class="form-group">
 	<label for="sendMsg" class="control-label">Message: </label>
 	<input type="text" class="form-control" name="sendMsg" ng-model="message" autofocus/>
