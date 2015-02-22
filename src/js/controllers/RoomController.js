@@ -27,7 +27,9 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 		// TODO: Check if the roomName equals the current room !
 		console.log("updateusers: ");
 		console.log(users);
-		$scope.currentUsers = users;
+		if (roomName === $scope.currentRoom) {
+			$scope.currentUsers = users;
+		}
 		console.log($scope.currentUsers);
 	});
 
@@ -36,4 +38,5 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 		console.log("scope.currentmessages");
 		console.log($scope.currentmessages)
 	});
+
 }]);
