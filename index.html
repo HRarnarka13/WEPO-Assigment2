@@ -23,7 +23,9 @@
 	<script type="text/javascript" src="src/js/controllers/RoomsController.js"></script>
 	<script type="text/javascript" src="src/js/controllers/RoomController.js"></script>
 	<script type="text/javascript" src="src/js/controllers/LoginController.js"></script>
+	<script type="text/javascript" src="src/js/controllers/PrivateMessageController.js"></script>
 	<script type="text/javascript" src="src/js/socket-factory.js"></script>
+
 	<!-- -->
 	
 </head>
@@ -52,7 +54,17 @@
 		<div class="view" ng-view>
 			Augnablik ...
 		</div>
+		<div ng-controller="PrivateMessageController" class="pull-right">
+			{{nick}}
+			<ul>
+				<li ng-repeat="user in users">{{user}}</li>
+			</ul>
+			<button type="button" class="btn btn-primary" ng-click="getUsers()">Online Users</button>
+		</div>
+
 	</div>
+
+	
 
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
