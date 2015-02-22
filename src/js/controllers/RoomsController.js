@@ -32,7 +32,7 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 				$scope.errorMessage = 'room name is empty!';
 				return;
 			} else {
-				$scope.currentRoom = $scope.roomName
+				$scope.currentRoom = $scope.roomName;
 			}
 		} else {
 			$scope.currentRoom = roomName;
@@ -44,5 +44,5 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 				$location.path('/room/' + $scope.currentUser + '/' + $scope.currentRoom);
 			}
 		});
-	}
+	};
 }]);
