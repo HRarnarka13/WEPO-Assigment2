@@ -39,7 +39,7 @@ module.exports = function ( grunt ) {
 		    	separator: ';',
 		    },
 		    dist: {
-				src: ['src/**/*.js', 'node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js'],
+				src: ['src/**/*.js', '!src/js/dest/*.js'],
 		      	dest: 'src/js/dest/built.js',
 		    },
 		 }
