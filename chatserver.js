@@ -35,7 +35,7 @@ io.sockets.on('connection', function (socket) {
 
 	//When a user joins a room this processes the request.
 	socket.on('joinroom', function (joinObj, fn) {
-
+		console.log("JOIN ROOM");
 		var room = joinObj.room;
 		var pass = joinObj.pass;
 		var accepted = true;
@@ -54,10 +54,12 @@ io.sockets.on('connection', function (socket) {
 			users[socket.username].channels[room] = room;
 			//Send the room information to the client.
 			fn(true);
-			io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
-			//Update topic
-			socket.emit('updatetopic', room, rooms[room].topic, socket.username);
-			io.sockets.emit('servermessage', "join", room, socket.username);
+			setTimeout(function() {
+				io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
+				//Update topic
+				socket.emit('updatetopic', room, rooms[room].topic, socket.username);
+				io.sockets.emit('servermessage', "join", room, socket.username);
+			}, 150);
 		}
 		else {
 
@@ -87,11 +89,13 @@ io.sockets.on('connection', function (socket) {
 				rooms[room].addUser(socket.username);
 				//Keep track of the room in the user object.
 				users[socket.username].channels[room] = room;
-				//Send the room information to the client.
-				io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
-				socket.emit('updatechat', room, rooms[room].messageHistory);
-				socket.emit('updatetopic', room, rooms[room].topic, socket.username);
-				io.sockets.emit('servermessage', "join", room, socket.username);
+				setTimeout(function() {
+					//Send the room information to the client.
+					io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
+					socket.emit('updatechat', room, rooms[room].messageHistory);
+					socket.emit('updatetopic', room, rooms[room].topic, socket.username);
+					io.sockets.emit('servermessage', "join", room, socket.username);
+				}, 150);
 			}
 			fn(false, reason);
 		}
@@ -109,9 +113,7 @@ io.sockets.on('connection', function (socket) {
 		if(rooms[data.roomName].ops[socket.username] !== undefined) {
 			userAllowed = true;
 		}
-		console.log("users: " + rooms[data.roomName].users[socket.username]);
-		console.log("ops: " + rooms[data.roomName].ops[socket.username]);
-		console.log(userAllowed);
+
 		if(userAllowed) {
 			//Update the message history for the room that the user sent the message to.
 			var messageObj = {
@@ -120,8 +122,6 @@ io.sockets.on('connection', function (socket) {
 				message : data.msg.substring(0, 200)
 			};
 			rooms[data.roomName].addMessage(messageObj);
-			console.log(rooms[data.roomName].messageHistory);
-			console.log("yoyoyoyooyoyoyoyoyoyo");
 			io.sockets.emit('updatechat', data.roomName, rooms[data.roomName].messageHistory);
 		}
 	});
