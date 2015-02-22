@@ -4,10 +4,21 @@
 
 <h3>Hi {{currentUser}} - Room {{currentRoom}}</h3>
 <div class="col-md-9">
+	
+</div>
+<div class="col-md-9">
 	<h4>Messages: </h4>
-	<ul>
-		<li ng-repeat="message in currentmessages">{{ message.message }}</li>
-	</ul>
+	<div class="well well-sm" ng-repeat="message in currentmessages">
+		<div class="media">
+		 	<div class="media-body pull-left">
+				<h4 class="media-heading">{{message.nick}}</h4>
+				{{message.message}}
+		 	</div>
+		 	<div class="media-right text-muted pull-right">
+		    	{{message.timestamp | date : 'd/M/yy - HH:mm:ss'}}
+		  	</div>
+		</div>
+	</div>
 </div>
 <div class="col-md-3">
 	<h4>Users in this room</h4>
@@ -21,5 +32,7 @@
 	<label for="sendMsg" class="control-label">Message: </label>
 	<input type="text" class="form-control" name="sendMsg" ng-model="newMessage" autofocus/>
 </div>
-<button type="button" class="btn btn-primary" ng-click="sendMsg()">Send</button>
-<button type="button" class="btn btn-primary" ng-click="backToRooms()">Rooms</button>
+<div>
+	<button type="button" class="btn btn-primary" ng-click="sendMsg()">Send</button>
+	<button type="button" class="btn btn-primary" ng-click="backToRooms()">Rooms</button>
+</div>
