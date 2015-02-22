@@ -48,5 +48,5 @@ module.exports = function ( grunt ) {
 	grunt.registerTask('minify', ['uglify']);
 	grunt.registerTask('makeonefile', ['concat']);
 	grunt.registerTask('makejs', ['concat', 'uglify']);
-	grunt.registerTask('default', ['jshint', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 };
