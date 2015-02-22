@@ -4,7 +4,9 @@
 
 <h3>Hi {{currentUser}} - Room {{currentRoom}}</h3>
 <div class="col-md-9">
-	
+	<div class="alert alert-info" ng-cloak ng-show="infoMessage != ''">
+		{{infoMessage}}
+	</div>
 </div>
 <div class="col-md-9">
 	<h4>Messages: </h4>
@@ -24,7 +26,10 @@
 	<h4>Users in this room</h4>
 	<div class="well">	
 		<ul>
-			<li ng-repeat="user in currentUsers">{{user}}</li>
+			<li ng-repeat="user in currentUsers">{{user}} 
+				<button type="button" class="btn" ng-click="kickUser(user)">Kick</button>
+				<button type="button" class="btn btn-danger" ng-click="banUser(user)">Kick</button>
+			</li>
 		</ul>
 	</div>
 </div>
@@ -34,5 +39,5 @@
 </div>
 <div>
 	<button type="button" class="btn btn-primary" ng-click="sendMsg()">Send</button>
-	<button type="button" class="btn btn-primary" ng-click="backToRooms()">Rooms</button>
+	<button type="button" class="btn" ng-click="partRoom(currentRoom)">Leave Room</button>
 </div>
