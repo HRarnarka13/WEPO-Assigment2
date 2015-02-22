@@ -54,14 +54,33 @@
 		<div class="view" ng-view>
 			Augnablik ...
 		</div>
-		<div ng-controller="PrivateMessageController" class="pull-right">
-			{{nick}}
-			<ul>
-				<li ng-repeat="user in users">{{user}}</li>
-			</ul>
-			<button type="button" class="btn btn-primary" ng-click="getUsers()">Online Users</button>
-		</div>
-
+		<div ng-controller="PrivateMessageController" class="row">
+			<div class="col-md-2 pull-right">
+				<button type="button" class="btn btn-success" ng-click="getUsers()">Online Users</button>
+				<ul>
+					<li ng-repeat="user in users"> <a ng-click="startChat(user)">{{user}}</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 pull-right" ng-show="friend">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					<h3 class="panel-title">{{friend}}</h3>
+					</div>
+					<div class="panel-body">
+						<p ng-repeat="pMessage in privateMessages">{{pMessage}}</p>
+						<div class="input-group">
+							<input type="text" class="form-control" name="privateMessage" ng-model="privateMessage"/>
+							<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="sendPrivateMessage(friend, privateMessage)">Send</button>
+							</span>
+						</div><!-- /input-group -->
+					</div><!-- pannel-body -->
+				</div><!-- pannel -->
+			</div>
+			<div class="col-md-3 pull-right" ng-show="recvMessage">
+				{{recvMessage}}
+			</div>
+		</div><!-- PrivateMessageController -->
 	</div>
 
 	
