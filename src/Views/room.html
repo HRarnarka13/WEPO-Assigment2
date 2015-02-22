@@ -4,7 +4,10 @@
 
 <h3>Hi {{currentUser}} - Room {{currentRoom}}</h3>
 <div class="col-md-9">
-	TODO - display chat
+	<h4>Messages: </h4>
+	<ul>
+		<li ng-repeat="message in currentmessages">{{ message.message }}</li>
+	</ul>
 </div>
 <div class="col-md-3">
 	<h4>Users in this room</h4>
@@ -14,14 +17,9 @@
 		</ul>
 	</div>
 </div>
-<div class="col-md-9">
-	<ul>
-		<li ng-repeat"mess in messageHistory">{{mess}}</li>
-	</ul>
-</div>
 <div class="form-group">
 	<label for="sendMsg" class="control-label">Message: </label>
-	<input type="text" class="form-control" name="sendMsg" ng-model="message" autofocus/>
+	<input type="text" class="form-control" name="sendMsg" ng-model="newMessage" autofocus/>
 </div>
 <button type="button" class="btn btn-primary" ng-click="sendMsg()">Send</button>
 <button type="button" class="btn btn-primary" ng-click="backToRooms()">Rooms</button>

@@ -1,78 +1,39 @@
-ChatClient.controller('RoomController',
+ChatClient.controller('RoomController', [
+	'$scope',
+	'$location',
+	'$rootScope',
+	'$routeParams',
+	'socket',
 function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.currentRoom = $routeParams.room;
 	$scope.currentUser = $routeParams.user;
 	$scope.currentUsers = [];
-	$scope.messageHistory = [];
+	$scope.currentmessages = [];
 	$scope.errorMessage = '';
 
-	$scope.sendMessage = {
-		roomName: $scope.currentRoom,
-		msg: $scope.message
-	};
-
-	$scope.newRoom = {
-			room : $scope.currentRoom,
-			pass : undefined
-	};
-
-	console.log("$scope.sendMessage: " + $scope.sendMessage);
-
 	$scope.sendMsg = function(){
-		$scope.sendMessage.msg = $scope.message;
-		console.log("Message: " + $scope.sendMessage.msg);
-		socket.emit('sendmsg', $scope.sendMessage, function (message){
-
-		});
-		$scope.getMessages();
-		// socket.emit('addMessage', $scope.message, function (Message){
-		// });
+		socket.emit('sendmsg', {
+			roomName: $scope.currentRoom, 
+			msg: $scope.newMessage
+		}, function (message) {});
+		$scope.newMessage = '';
 	};
 
 	$scope.backToRooms = function(){
-		$location.path('/rooms/' + $scope.nickname);
+		$location.path('/rooms/' + $scope.currentUser);
 	};
-
-	socket.emit('joinroom', $scope.newRoom, function (success, reason) {
-		if (!success) {
-			$scope.errorMessage = reason;
-		}
-	});
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
-		console.log("updateusers: " + users);
+		console.log("updateusers: ");
+		console.log(users);
 		$scope.currentUsers = users;
+		console.log($scope.currentUsers);
 	});
 
 	socket.on('updatechat', function (roomName, messages) {
-		console.log("updatechat, messages");
-		console.log(messages);
-		$scope.$apply = function () {
-			for (var i = messages.length - 1; i >= 0; i--) {
-				$scope.messageHistory.push(messages[i].message);
-			};
-		}
-		console.log("scope.messageHistory");
-		console.log($scope.messageHistory);
+		$scope.currentmessages = messages;
+		console.log("scope.currentmessages");
+		console.log($scope.currentmessages)
 	});
-
-	// $scope.getMessages = function () {
-	// 	socket.emit("rooms", function() {
-	// 		console.log("inni rooms socket");
-	// 	});
-	// };
-
-	// socket.on("roomlist", function(roomList) {
-	// 	console.log(roomList);
-	// 	$scope.messageHistory = roomList.lobby.messageHistory;
-	// 	console.log('Message History: ');
-	// 	console.log($scope.messageHistory);
-	// });
-
-	/*socket.emit('joinroom', $scope.currentRoom, function (success, reason) {
-		if (!success) {
-			$scope.errorMessage = reason;
-		}
-	});*/
-});
+}]);
