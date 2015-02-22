@@ -73,12 +73,14 @@
 					</div>
 					<div class="panel-body">
 						<p ng-repeat="pMessage in friend.msgHistory track by $index">{{pMessage}}</p>
-						<div class="input-group">
-							<input type="text" class="form-control" name="privateMessage" ng-model="privateMessage"/>
-							<span class="input-group-btn">
-							<button class="btn btn-default" type="button" ng-click="sendPrivateMessage(friend.name, privateMessage)">Send</button>
-							</span>
-						</div><!-- /input-group -->
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" name="privateMessage" ng-model="privateMessage"/>
+								<span class="input-group-btn">
+								<button class="btn btn-default" type="submit" ng-click="sendPrivateMessage(friend.name, privateMessage)">Send</button>
+								</span>
+							</div><!-- /input-group -->
+						</form>
 					</div><!-- pannel-body -->
 				</div><!-- pannel -->
 			</div>

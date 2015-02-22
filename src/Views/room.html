@@ -1,7 +1,6 @@
 <div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
 	{{errorMessage}}
 </div>
-
 <h3>Hi {{currentUser}} - Room {{currentRoom}}</h3>
 <div class="col-md-9">
 	<div class="alert alert-info" ng-cloak ng-show="infoMessage != ''">
@@ -28,16 +27,19 @@
 		<ul>
 			<li ng-repeat="user in currentUsers">{{user}} 
 				<button type="button" class="btn" ng-click="kickUser(user)">Kick</button>
-				<button type="button" class="btn btn-danger" ng-click="banUser(user)">Kick</button>
+				<button type="button" class="btn btn-danger" ng-click="banUser(user)">Ban</button>
 			</li>
 		</ul>
 	</div>
 </div>
-<div class="form-group">
-	<label for="sendMsg" class="control-label">Message: </label>
-	<input type="text" class="form-control" name="sendMsg" ng-model="newMessage" autofocus/>
-</div>
-<div>
-	<button type="button" class="btn btn-primary" ng-click="sendMsg()">Send</button>
-	<button type="button" class="btn" ng-click="partRoom(currentRoom)">Leave Room</button>
+<form class="col-md-9">
+	<div class="form-group">
+		<label for="sendMsg" class="control-label">Message: </label>
+		<input type="text" class="form-control" name="sendMsg" ng-model="newMessage" autofocus/>
+	</div>
+	<button type="submit" class="btn btn-primary" ng-click="sendMsg()">Send</button>
+</form>
+
+<div class="col-md-12">
+	<button type="button" class="btn btn-warning" ng-click="partRoom(currentRoom)">Leave Room</button>
 </div>
