@@ -22,7 +22,8 @@ module.exports = function ( grunt ) {
 					angular: false,
 					moment:  false,
 					console: false,
-					$:       false
+					$:       false,
+					io:      false
 				}
 			}
 		},
