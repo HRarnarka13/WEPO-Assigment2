@@ -1,4 +1,4 @@
-ChatClient.controller('LoginController',
+angular.module("ChatClient").controller('LoginController',
 function ($scope, $location, $rootScope, $routeParams, socket) {
 	
 	$scope.errorMessage = '';

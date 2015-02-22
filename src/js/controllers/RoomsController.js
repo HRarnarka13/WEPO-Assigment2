@@ -1,4 +1,4 @@
-ChatClient.controller('RoomsController', [
+angular.module("ChatClient").controller('RoomsController', [
 	'$scope',
 	'$location',
 	'$rootScope',

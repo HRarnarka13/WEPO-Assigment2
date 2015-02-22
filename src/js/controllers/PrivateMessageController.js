@@ -1,4 +1,4 @@
-ChatClient.controller('PrivateMessageController', [
+angular.module("ChatClient").controller('PrivateMessageController', [
 	'$scope',
 	'$location',
 	'$rootScope',
