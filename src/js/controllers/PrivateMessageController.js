@@ -46,9 +46,9 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.sendPrivateMessage = function (user, message) {
 		$scope.privateMessage = '';
 		console.log("pri" + $scope.privateMessage);
-		var a = findFriend(user);
-		console.log(a);
-		a.msgHistory.push(message);
+		var currFriend = findFriend(user);
+		console.log(currFriend);
+		currFriend.msgHistory.push(message);
 		console.log("To: " + user + " Message: " + message);
 		socket.emit('privatemsg', {nick: user, message: message}, function(sent) {
 			if (sent) {
@@ -59,8 +59,8 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 
 	 socket.on('recv_privatemsg', function(friend, message) {
 	 	$scope.privateMessage = '';
-	 	var a = findFriend(friend);
-	 	console.log("a " + a);
-		a.msgHistory.push(message);
+	 	var currFriend = findFriend(friend);
+	 	console.log("currFriend " + currFriend);
+		currFriend.msgHistory.push(message);
 	 });
 }]);
