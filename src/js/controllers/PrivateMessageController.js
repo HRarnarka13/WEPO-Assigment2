@@ -19,7 +19,7 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 				if (userlist[i] !== $routeParams.user){
 					$scope.users.push(userlist[i]);
 				}
-			};
+			}
 		});
 	};
 
