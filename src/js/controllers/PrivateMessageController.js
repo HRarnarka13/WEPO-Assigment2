@@ -63,5 +63,4 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	 	console.log("a " + a);
 		a.msgHistory.push(message);
 	 });
-
 }]);
