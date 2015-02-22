@@ -7,12 +7,6 @@ angular.module("ChatClient").controller('RoomsController', [
 function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
 	$scope.currentUser = $routeParams.user;
-	//ENTER has the same function as the button "Create"
-	$(window).keypress(function(e){
-		if(e.keyCode == 13){
-			$scope.joinRoom();
-		}
-	});
 	$scope.errorMessage = '';
 
 	socket.emit("rooms", function () {

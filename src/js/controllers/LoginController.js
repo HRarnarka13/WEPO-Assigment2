@@ -4,13 +4,6 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.errorMessage = '';
 	$scope.nickname = '';
 
-	//Enter has the same function as the button "Enter chat"
-	$(window).keypress(function(e){
-		if(e.keyCode == 13){
-			$scope.login();
-		}
-	});
-
 	$scope.login = function() {
 
 		if ($scope.nickname === '') {
