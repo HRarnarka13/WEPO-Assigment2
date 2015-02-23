@@ -12,13 +12,12 @@
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
 	<!-- Deployment, all javascript files in a single file -->
-
+	<!--
 	<script type="text/javascript" src="src/js/dest/output.min.js"></script>
-
+	-->
 
 	<!-- For programming -->
-	<!--
-	<script type="text/javascript" src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+	<!-- -->
 	<script type="text/javascript" src="src/js/App.js"></script>
 	<script type="text/javascript" src="src/js/controllers/RoomsController.js"></script>
 	<script type="text/javascript" src="src/js/controllers/RoomController.js"></script>
@@ -26,7 +25,7 @@
 	<script type="text/javascript" src="src/js/controllers/PrivateMessageController.js"></script>
 	<script type="text/javascript" src="src/js/socket-factory.js"></script>
 
-	-->
+	<!-- -->
 	
 </head>
 <body ng-app="ChatClient">
@@ -59,10 +58,10 @@
 				<!-- Large button group -->
 				<div class="btn-group dropup">
 				<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" ng-click="getUsers()">
-						Online Users <span class="caret"></span>
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Online Users <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li ng-repeat="user in users"> <a ng-click="startChat(user)">{{user}}</a></li
+						<li ng-repeat="user in users track by $index"> <a ng-click="startChat(user)">{{user}}</a></li
 					</ul>
 				</div>
 			</div>
@@ -73,11 +72,11 @@
 					</div>
 					<div class="panel-body">
 						<p ng-repeat="pMessage in friend.msgHistory track by $index">{{pMessage}}</p>
-						<form>
+						<form ng-submit="sendPrivateMessage(friend.name, privateMessage)">
 							<div class="input-group">
 								<input type="text" class="form-control" name="privateMessage" ng-model="privateMessage"/>
 								<span class="input-group-btn">
-								<button class="btn btn-default" type="submit" ng-click="sendPrivateMessage(friend.name, privateMessage)">Send</button>
+								<button class="btn btn-default" type="submit">Send</button>
 								</span>
 							</div><!-- /input-group -->
 						</form>
