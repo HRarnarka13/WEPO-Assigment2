@@ -35,6 +35,7 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 			if (!success) {
 				$scope.errorMessage = reason;
 			} else {
+				socket.emit("rooms");
 				$location.path('/room/' + $scope.currentUser + '/' + $scope.currentRoom);
 			}
 		});

@@ -89,9 +89,11 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 	});
 
 	socket.on('updatechat', function (roomName, messages) {
-		$scope.currentmessages = messages;
-		console.log("scope.currentmessages");
-		console.log($scope.currentmessages);
+		if ($scope.currentRoom === roomName) {
+			$scope.currentmessages = messages;
+			console.log("scope.currentmessages");
+			console.log($scope.currentmessages);
+		}
 	});
 
 }]);
