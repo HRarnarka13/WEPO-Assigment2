@@ -35,7 +35,7 @@ io.sockets.on('connection', function (socket) {
 
 	//When a user joins a room this processes the request.
 	socket.on('joinroom', function (joinObj, fn) {
-		console.log("JOIN ROOM");
+		
 		var room = joinObj.room;
 		var pass = joinObj.pass;
 		var accepted = true;
@@ -50,6 +50,8 @@ io.sockets.on('connection', function (socket) {
 			if(pass !== undefined) {
 				rooms[room].setPassword(pass);
 			}
+			//Add user to room.
+			rooms[room].addUser(socket.username); // missing from origial
 			//Keep track of the room in the user object.
 			users[socket.username].channels[room] = room;
 			//Send the room information to the client.
