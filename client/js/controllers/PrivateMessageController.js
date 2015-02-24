@@ -23,13 +23,14 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 		socket.emit('users');
 	};
 
+	// Open a private message window
 	$scope.startChat = function (user) {
 		findFriend(user);
 	};
 
 	// Returns the given friend message history in the list of friends
 	// if the friend is not found we create a new friend object and add
-	// it to the list
+	// it to the list.
 	function findFriend(friend) {
 		for (var i = $scope.friends.length - 1; i >= 0; i--) {
 			if ($scope.friends[i].name === friend) {
@@ -43,6 +44,7 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 		return newFriend;
 	}
 
+	// Send a private message to another user 
 	$scope.sendPrivateMessage = function (user, message) {
 		var currFriend = findFriend(user);
 		currFriend.msgHistory.push({"msg" :message, "friend" :"Me"});
@@ -56,6 +58,7 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 
 	};
 
+	// Receve a private message from another user 
 	socket.on('recv_privatemsg', function(friend, message) {
 	 	$scope.privateMessage = '';
 	 	var currFriend = findFriend(friend);
