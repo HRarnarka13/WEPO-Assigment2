@@ -5,12 +5,11 @@ angular.module("ChatClient").controller('LoginController', [
 	'$routeParams',
 	'socket',
 function ($scope, $location, $rootScope, $routeParams, socket) {
-	
+
 	$scope.errorMessage = '';
 	$scope.nickname = '';
 
 	$scope.login = function() {
-
 		if ($scope.nickname === '') {
 			$scope.errorMessage = 'Please choose a nick-name before continuing!';
 		} else {
