@@ -16,7 +16,7 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	});
 
 	$scope.getUsers = function () {
-		$scope.currentUser = $routeParams.user
+		$scope.currentUser = $routeParams.user;
 		console.log("currentUser ", $scope.currentUser);
 		socket.emit('users');
 		console.log("get users");
