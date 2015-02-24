@@ -15,11 +15,17 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 		socket.emit('users');
 		console.log("get users");
 		socket.on('userlist', function (userlist) {
-			for (var i = userlist.length - 1; i >= 0; i--) {
+			for (var i = 0; i < userlist.length; i++) {
 				if (userlist[i] !== $routeParams.user){
+					for (var j = 0; j < $scope.users.length; j++) {
+						if(userlist[i] === $scope.users[j]){
+							return;
+						}
+					}
 					$scope.users.push(userlist[i]);
 				}
 			}
+			console.log($scope.users);
 		});
 	};
 
