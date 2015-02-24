@@ -4,7 +4,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.initConfig({
 		jshint: {
-			src: ['src/**/*.js', '!src/js/dest/*.js'],
+			src: ['client/js/**/*.js', '!client/js/dest/*.js'],
 			gruntfile: ['Gruntfile.js'],
 			options: {
 				curly:  true,
@@ -30,7 +30,7 @@ module.exports = function ( grunt ) {
 		uglify: {
 			my_target: {
 		      	files: {
-		        	'src/js/dest/output.min.js': ['src/js/dest/built.js']
+		        	'client/js/dest/output.min.js': ['client/js/dest/built.js']
 		      	}
 		    }
 		},
@@ -39,8 +39,8 @@ module.exports = function ( grunt ) {
 		    	separator: ';',
 		    },
 		    dist: {
-				src: ['src/**/*.js', '!src/js/dest/*.js'],
-		      	dest: 'src/js/dest/built.js',
+				src: ['client/js/**/*.js', '!client/js/dest/*.js'],
+		      	dest: 'client/js/dest/built.js',
 		    },
 		 }
 	});
