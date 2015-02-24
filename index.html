@@ -12,12 +12,12 @@
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
 	<!-- Deployment, all javascript files in a single file -->
-	<!--
+	<!-- -->
 	<script type="text/javascript" src="client/js/dest/output.min.js"></script>
-	-->
+	<!-- -->
 
 	<!-- For programming -->
-	<!-- -->
+	<!-- 
 	<script type="text/javascript" src="client/js/App.js"></script>
 	<script type="text/javascript" src="client/js/controllers/RoomsController.js"></script>
 	<script type="text/javascript" src="client/js/controllers/RoomController.js"></script>
@@ -25,7 +25,7 @@
 	<script type="text/javascript" src="client/js/controllers/PrivateMessageController.js"></script>
 	<script type="text/javascript" src="client/js/factorys/socket-factory.js"></script>
 
-	<!-- -->
+	 -->
 	
 </head>
 <body ng-app="ChatClient">
@@ -53,41 +53,9 @@
 		<div class="view" ng-view>
 			Augnablik ...
 		</div>
-		<div ng-controller="PrivateMessageController" class="row">
-			<div class="col-md-2 pull-right">
-				<!-- Large button group -->
-				<div class="btn-group dropup">
-				<button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" ng-click="getUsers()">
-						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Online Users <span class="caret"></span>
-					</button>
-
-					<ul class="dropdown-menu" role="menu">
-						<li ng-repeat="user in users">
-							<a ng-if="user != currentUser" ng-click="startChat(user)">{{user}}</a></li>
-					</ul>
-				</div>
-			</div>
-			<br></br>
-			<div class="col-md-3 pull-right" ng-repeat="friend in friends">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-					<h3 class="panel-title">{{friend.name}}</h3>
-					</div>
-					<div class="panel-body"> 
-						<p ng-repeat="pMessage in friend.msgHistory track by $index"><strong>{{pMessage.friend}}:</strong> {{pMessage.msg}}</p>
-						<form ng-submit="sendPrivateMessage(friend.name, privateMessage);privateMessage = '';">
-							<div class="input-group">
-								<input type="text" class="form-control" ng-model="privateMessage"/>
-								<span class="input-group-btn">
-								<button class="btn btn-default" type="submit">Send</button>
-								</span>
-							</div><!-- /input-group -->
-						</form>
-					</div><!-- pannel-body -->
-				</div><!-- pannel -->
-			</div>
-		</div><!-- PrivateMessageController -->
-	</div>
+		<div ng-controller="PrivateMessageController" class="row" ng-include="'client/Views/privatemessage.html'">
+		
+		</div>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
