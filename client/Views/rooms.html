@@ -4,9 +4,12 @@
 		{{errorMessage}}
 	</div>
 	<ul>
+		<!-- List of avaible rooms-->
 		<li ng-repeat="room in rooms"><a ng-click="joinRoom(room)">{{room}}</a></li>
 	</ul>
 </div>
+
+<!-- Form for new room -->
 <form class="form-inline">
 	<div class="form-group">
 		<label for="roomName" class="control-label">New room: </label>
