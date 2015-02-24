@@ -12,6 +12,7 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 	$scope.currentmessages = [];
 	$scope.errorMessage = '';
 	$scope.infoMessage = '';
+	$scope.currentOps = [];
 
 	$scope.sendMsg = function(){
 		socket.emit('sendmsg', {
@@ -83,8 +84,10 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
 		console.log("ops: " + Object.keys(ops));
+		console.log(ops);
 		if (roomName === $scope.currentRoom) {
 			$scope.currentUsers = users;
+			$scope.currentOps = ops;
 		}
 	});
 

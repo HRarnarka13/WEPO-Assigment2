@@ -51,7 +51,7 @@ io.sockets.on('connection', function (socket) {
 				rooms[room].setPassword(pass);
 			}
 			//Add user to room.
-			rooms[room].addUser(socket.username); // missing from origial
+			//rooms[room].addUser(socket.username); // missing from origial
 			//Keep track of the room in the user object.
 			users[socket.username].channels[room] = room;
 			//Send the room information to the client.
