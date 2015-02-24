@@ -10,23 +10,16 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.privateMessage = '';
 	$scope.privateMessages = [];
 	$scope.friends = [];
+	socket.on('userlist', function (userlist) {
+		$scope.users = userlist;			
+		console.log($scope.users);
+	});
 
 	$scope.getUsers = function () {
+		$scope.currentUser = $routeParams.user
+		console.log("currentUser ", $scope.currentUser);
 		socket.emit('users');
 		console.log("get users");
-		socket.on('userlist', function (userlist) {
-			for (var i = 0; i < userlist.length; i++) {
-				if (userlist[i] !== $routeParams.user){
-					for (var j = 0; j < $scope.users.length; j++) {
-						if(userlist[i] === $scope.users[j]){
-							return;
-						}
-					}
-					$scope.users.push(userlist[i]);
-				}
-			}
-			console.log($scope.users);
-		});
 	};
 
 	$scope.startChat = function (user) {
@@ -50,8 +43,8 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	}
 
 	$scope.sendPrivateMessage = function (user, message) {
-		$scope.privateMessage = '';
 		console.log("pri" + $scope.privateMessage);
+		console.log($rootScope);
 		var currFriend = findFriend(user);
 		console.log(currFriend);
 		currFriend.msgHistory.push(message);
@@ -61,6 +54,8 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 				console.log("private message sent");
 			}
 		});
+		$scope.privateMessage = '';
+
 	};
 
 	 socket.on('recv_privatemsg', function(friend, message) {
