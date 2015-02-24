@@ -7,7 +7,14 @@
 		{{infoMessage}}
 	</div>
 </div>
-<div class="col-md-9">
+<style>
+#autoscroll {
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: none;
+}
+</style>
+<div class="col-md-9" id="autoscroll">
 	<h4>Messages: </h4>
 	<div class="well well-sm" ng-repeat="message in currentmessages">
 		<div class="media">
@@ -26,9 +33,9 @@
 	<div class="well">	
 		<ul>
 			<li ng-repeat="(name, op) in currentOps">{{op}}</li>
-			<li ng-repeat="(name, user) in currentUsers">{{user}} 
-				<button type="button" class="btn" ng-click="kickUser(user)">Kick</button>
-				<button type="button" class="btn btn-danger" ng-click="banUser(user)">Ban</button>
+			<li ng-repeat="(name, user) in currentUsers">{{user}}
+				<button type="button" class="btn" ng-if="isOp()" ng-click="kickUser(user)">Kick</button>
+				<button type="button" class="btn btn-danger" ng-if="isOp()" ng-click="banUser(user)">Ban</button>
 			</li>
 		</ul>
 	</div>

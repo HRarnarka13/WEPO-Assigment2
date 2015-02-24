@@ -14,6 +14,18 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 	$scope.infoMessage = '';
 	$scope.currentOps = [];
 
+	$scope.isOp = function () {
+		console.log("currentOp", $scope.currentOps);
+
+		//return $scope.currentOps.some(item => item == user);
+		for (var key in $scope.currentOps) {
+			if ($scope.currentOps.hasOwnProperty(key) && key === $scope.currentUser) {
+				return true;
+			}
+		}
+		return false;
+	};
+
 	$scope.sendMsg = function(){
 		socket.emit('sendmsg', {
 			roomName: $scope.currentRoom, 
@@ -97,6 +109,8 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 			console.log("scope.currentmessages");
 			console.log($scope.currentmessages);
 		}
+		var element = document.getElementById("autoscroll");
+	    element.scrollTop = element.scrollHeight;
 	});
 
 }]);

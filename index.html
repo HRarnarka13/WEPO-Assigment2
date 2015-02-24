@@ -74,7 +74,7 @@
 					<h3 class="panel-title">{{friend.name}}</h3>
 					</div>
 					<div class="panel-body"> 
-						<p ng-repeat="pMessage in friend.msgHistory track by $index"> {{pMessage}}</p>
+						<p ng-repeat="pMessage in friend.msgHistory track by $index"><strong>{{pMessage.friend}}:</strong> {{pMessage.msg}}</p>
 						<form ng-submit="sendPrivateMessage(friend.name, privateMessage);privateMessage = '';">
 							<div class="input-group">
 								<input type="text" class="form-control" ng-model="privateMessage"/>

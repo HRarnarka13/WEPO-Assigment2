@@ -47,7 +47,7 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 		console.log($rootScope);
 		var currFriend = findFriend(user);
 		console.log(currFriend);
-		currFriend.msgHistory.push(message);
+		currFriend.msgHistory.push({"msg" :message, "friend" :"Me"});
 		console.log("To: " + user + " Message: " + message);
 		socket.emit('privatemsg', {nick: user, message: message}, function(sent) {
 			if (sent) {
@@ -59,9 +59,10 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 	};
 
 	 socket.on('recv_privatemsg', function(friend, message) {
+
 	 	$scope.privateMessage = '';
 	 	var currFriend = findFriend(friend);
 	 	console.log("currFriend " + currFriend);
-		currFriend.msgHistory.push(message);
+		currFriend.msgHistory.push({"msg" :message, "friend" :currFriend.name});
 	 });
 }]);
