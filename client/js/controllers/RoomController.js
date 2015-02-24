@@ -14,10 +14,8 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 	$scope.infoMessage = '';
 	$scope.currentOps = [];
 
+	// Check if user is the op of a room
 	$scope.isOp = function () {
-		console.log("currentOp", $scope.currentOps);
-
-		//return $scope.currentOps.some(item => item == user);
 		for (var key in $scope.currentOps) {
 			if ($scope.currentOps.hasOwnProperty(key) && key === $scope.currentUser) {
 				return true;
@@ -26,6 +24,7 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 		return false;
 	};
 
+	// Send message in a room 
 	$scope.sendMsg = function(){
 		socket.emit('sendmsg', {
 			roomName: $scope.currentRoom, 
@@ -34,25 +33,23 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 		$scope.newMessage = '';
 	};
 
+	// Redirect user to rooms 
 	$scope.backToRooms = function(){
 		$location.path('/rooms/' + $scope.currentUser);
 	};
 
+	// User leaves a room
 	$scope.partRoom = function (roomName) {
 		socket.emit('partroom', roomName);
 		$scope.backToRooms();
 	};
 
+	// Kick user functions 
+
 	$scope.kickUser = function (user) {
 		socket.emit('kick', {user: user, room: $scope.currentRoom}, function (kicked) {
-			if (kicked) {
-				console.log("user was kicked");
-				if (user === $scope.currentUser) {
-					$scope.backToRooms();
-				}
-			} else {
-				console.log("user was not kicked");
-				$scope.errorMessage = "You have no right to kick someone out";
+			if (kicked && user === $scope.currentUser) {
+				$scope.backToRooms();
 			}
 		});
 	};
@@ -62,22 +59,16 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 			$scope.backToRooms();
 		} else {
 			$scope.infoMessage = kickedUser + " has been kicked out by " + ops;
-			$timeout(function () {
-				$scope.infoMessage = "";
-			}, 5000);  
+			removeErrorMessage(); 
 		}
 	});
 
+	// Ban user functions
+
 	$scope.banUser = function (user) {
 		socket.emit('ban', {user: user, room: $scope.currentRoom}, function (banned) {
-			if (banned) {
-				console.log("user was banned");
-				if (user === $scope.currentUser) {
-					$scope.backToRooms();
-				}
-			} else {
-				console.log("user was not banned");
-				$scope.errorMessage = "You have no right to ban someone";
+			if (banned && user === $scope.currentUser) {
+				$scope.backToRooms();
 			}
 		});
 	};
@@ -87,16 +78,13 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 			$scope.backToRooms();
 		} else {
 			$scope.infoMessage = bannedUser + " has been banned by " + ops;
-			$timeout(function () {
-				$scope.infoMessage = "";
-			}, 5000);  
+			removeErrorMessage();
 		}
 	});
 
+	// On update functions
+
 	socket.on('updateusers', function (roomName, users, ops) {
-		// TODO: Check if the roomName equals the current room !
-		console.log("ops: " + Object.keys(ops));
-		console.log(ops);
 		if (roomName === $scope.currentRoom) {
 			$scope.currentUsers = users;
 			$scope.currentOps = ops;
@@ -106,11 +94,19 @@ function ($scope, $location, $rootScope, $routeParams, socket, $timeout) {
 	socket.on('updatechat', function (roomName, messages) {
 		if ($scope.currentRoom === roomName) {
 			$scope.currentmessages = messages;
-			console.log("scope.currentmessages");
-			console.log($scope.currentmessages);
 		}
-		var element = document.getElementById("autoscroll");
-	    element.scrollTop = element.scrollHeight;
+		// Autoscroll
+		$('#autoscroll').animate({
+  			scrollTop: $('#autoscroll').get(0).scrollHeight
+		}, 150);
 	});
+
+
+	// Removes error message after 5 sec
+	function removeErrorMessage () {
+		$timeout(function () {
+			$scope.infoMessage = "";
+		}, 5000); 
+	}
 
 }]);
