@@ -5,32 +5,34 @@ angular.module("ChatClient").controller('PrivateMessageController', [
 	'$routeParams',
 	'socket',
 function ($scope, $location, $rootScope, $routeParams, socket) {
-	console.log("private");
+
 	$scope.users = [];
+	$scope.currentUser = '';
 	$scope.privateMessage = '';
 	$scope.privateMessages = [];
 	$scope.friends = [];
+
+	// Get all a list of all online user
 	socket.on('userlist', function (userlist) {
 		$scope.users = userlist;			
-		console.log($scope.users);
 	});
 
+	// 
 	$scope.getUsers = function () {
 		$scope.currentUser = $routeParams.user;
-		console.log("currentUser ", $scope.currentUser);
 		socket.emit('users');
-		console.log("get users");
 	};
 
 	$scope.startChat = function (user) {
 		findFriend(user);
-		console.log("startChat " + user);
 	};
 
+	// Returns the given friend message history in the list of friends
+	// if the friend is not found we create a new friend object and add
+	// it to the list
 	function findFriend(friend) {
 		for (var i = $scope.friends.length - 1; i >= 0; i--) {
 			if ($scope.friends[i].name === friend) {
-				console.log("findFriend " + $scope.friends[i]);
 				return $scope.friends[i];
 			}
 		}
@@ -38,17 +40,13 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 			name: friend, msgHistory: []
 		};
 		$scope.friends.push(newFriend);
-		console.log("newFriend " + newFriend);
 		return newFriend;
 	}
 
 	$scope.sendPrivateMessage = function (user, message) {
-		console.log("pri" + $scope.privateMessage);
-		console.log($rootScope);
 		var currFriend = findFriend(user);
-		console.log(currFriend);
 		currFriend.msgHistory.push({"msg" :message, "friend" :"Me"});
-		console.log("To: " + user + " Message: " + message);
+
 		socket.emit('privatemsg', {nick: user, message: message}, function(sent) {
 			if (sent) {
 				console.log("private message sent");
@@ -58,11 +56,9 @@ function ($scope, $location, $rootScope, $routeParams, socket) {
 
 	};
 
-	 socket.on('recv_privatemsg', function(friend, message) {
-
+	socket.on('recv_privatemsg', function(friend, message) {
 	 	$scope.privateMessage = '';
 	 	var currFriend = findFriend(friend);
-	 	console.log("currFriend " + currFriend);
 		currFriend.msgHistory.push({"msg" :message, "friend" :currFriend.name});
-	 });
+	});
 }]);
